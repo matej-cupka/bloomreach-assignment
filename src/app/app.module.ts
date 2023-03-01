@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+// Components
 import {AppComponent} from './views/app/app.component';
 
 @NgModule({
@@ -9,6 +11,7 @@ import {AppComponent} from './views/app/app.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
