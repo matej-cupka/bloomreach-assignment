@@ -1,1 +1,20 @@
-Hello World!
+<div class="flex flex-col gap-2"
+     *ngrxLet="vm$; let vm">
+  <div class="flex items-center justify-between gap-2">
+    <div class="text-lg font-medium">Custom Filter</div>
+    <button mat-button
+            color="warn"
+            type="button"
+            [disabled]="vm.isLoading">Discard filters
+    </button>
+  </div>
+
+  <mat-progress-bar mode="indeterminate"
+                    *ngIf="vm.isLoading; else viewForm"></mat-progress-bar>
+
+  <ng-template #viewForm>
+    <div>
+      TODO
+    </div>
+  </ng-template>
+</div>
