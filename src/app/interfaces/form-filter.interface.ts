@@ -8,11 +8,13 @@ export type IForm = FormGroup<IFormGroup>;
 
 export interface IFormGroup {
   event: FormControl<IEvent | null>;
-  filters: FormArray<IFormFilterGroup>;
+  properties: FormArray<IFormProperty>;
 }
 
-export type IFormFilterGroup = FormGroup<{
+export type IFormProperty = FormGroup<IFormPropertyGroup>
+
+export interface IFormPropertyGroup {
   property: FormControl<IProperty | null>;
   operator: FormControl<TOperator | null>;
   value: FormControl<any>; // TODO: Set type
-}>
+}

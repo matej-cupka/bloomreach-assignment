@@ -1,8 +1,9 @@
 <div class="flex flex-col gap-4">
   <ng-container *ngFor="let formRow of form.controls; let index = index">
     <app-filter-row [form]="formRow"
-                    [index]="index"></app-filter-row>
-
+                    [index]="index"
+                    (delete)="onDelete($event)"
+                    (duplicate)="onDuplicate($event)"></app-filter-row>
     <mat-divider></mat-divider>
   </ng-container>
 

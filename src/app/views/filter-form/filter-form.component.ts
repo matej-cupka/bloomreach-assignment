@@ -14,4 +14,12 @@ export class FilterFormComponent {
   onAddFunnelStepClick() {
     this.addFunnelStep.emit();
   }
+
+  onDelete(index: number) {
+    // TODO
+  }
+
+  onDuplicate(index: number) {
+    // TODO
+  }
 }

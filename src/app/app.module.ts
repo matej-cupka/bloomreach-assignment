@@ -22,7 +22,8 @@ import {EventDataStore} from './store/event-data.store';
 import {AppComponent} from './views/app/app.component';
 import {SelectSearchComponent} from './views/select-search/select-search.component';
 import {FilterFormComponent} from './views/filter-form/filter-form.component';
-import {FilterRowComponent} from './views/filter-row/filter-row.component';
+import {FilterRowComponent} from './views/filter-form/filter-row/filter-row.component';
+import {FilterPropertyComponent} from './views/filter-form/filter-row/filter-property/filter-property.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {FilterRowComponent} from './views/filter-row/filter-row.component';
     SelectSearchComponent,
     FilterFormComponent,
     FilterRowComponent,
+    FilterPropertyComponent,
   ],
   imports: [
     BrowserModule,

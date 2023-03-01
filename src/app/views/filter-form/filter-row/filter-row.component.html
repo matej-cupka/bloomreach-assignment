@@ -1,0 +1,45 @@
+<div class="flex flex-col gap-2"
+     [formGroup]="form"
+     *ngrxLet="vm$; let vm">
+  <div class="flex items-center gap-2">
+    <div>{{index + 1}}. Step: <span class="font-medium">{{form.value.event?.type ?? 'Unnamed step'}}</span></div>
+
+    <div class="grow"></div>
+
+    <button mat-icon-button
+            type="button"
+            (click)="onDeleteClick()">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-icon-button
+            type="button"
+            (click)="onDuplicateClick()">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  </div>
+
+  <div class="flex gap-8">
+    <!-- Event filter -->
+    <app-select-search placeholder="Select an event"
+                       [options]="vm.eventData.events"
+                       [displayWith]="eventDisplayWithFn"
+                       labelPropertyPath="type"
+                       formControlName="event">
+    </app-select-search>
+
+    <!-- Property filters -->
+    <div class="flex flex-col gap-4"
+         *ngIf="form.value.event !== null">
+      <app-filter-property *ngFor="let propertyRow of form.controls.properties.controls"></app-filter-property>
+
+      <button [class.mt-2.5]="doesntHaveEventProperties$ | async"
+              mat-button
+              color="primary"
+              type="button"
+              (click)="onAddEventAttributeClick()">
+        <mat-icon *ngIf="doesntHaveEventProperties$ | async">add</mat-icon>
+        {{(doesntHaveEventProperties$ | async) ? 'Add an event attribute' : 'Refine more'}}
+      </button>
+    </div>
+  </div>
+</div>
