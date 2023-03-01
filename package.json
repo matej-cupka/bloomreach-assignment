@@ -8,6 +8,10 @@
     "watch": "ng build --watch --configuration development"
   },
   "private": true,
+  "author": {
+    "name": "Matej Čupka",
+    "email": "matej.cupka@icloud.com"
+  },
   "dependencies": {
     "@angular/animations": "^15.1.0",
     "@angular/cdk": "^15.2.0",

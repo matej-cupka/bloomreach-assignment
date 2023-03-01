@@ -2,10 +2,8 @@ import {Component, HostBinding} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 
 import {EventDataStore} from '../../store/event-data.store';
-import {IFormFilter, IFormFilterGroup} from '../../interfaces/form-filter.interface';
+import {IForm, IFormFilterGroup, IFormGroup} from '../../interfaces/form-filter.interface';
 import {IEvent} from '../../interfaces/event.interface';
-import {IProperty} from '../../interfaces/property.interface';
-import {TOperator} from '../../types/operator.type';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +13,7 @@ import {TOperator} from '../../types/operator.type';
 export class AppComponent {
   @HostBinding('class') readonly classList = '[ block ] [ w-full max-w-7xl ]';
 
-  formFilter: FormArray = new FormArray<IFormFilter>([
+  readonly formFilter: FormArray = new FormArray<IForm>([
     this.getFilterGroup(),
   ]);
 
@@ -25,7 +23,7 @@ export class AppComponent {
   }
 
   onDiscardFiltersClick() {
-    this.formFilter.clear();
+    this.formFilter.clear({emitEvent: false});
     this.addFilter();
   }
 
@@ -33,14 +31,14 @@ export class AppComponent {
     this.formFilter.push(this.getFilterGroup());
   }
 
-  private getFilterGroup(): FormGroup<IFormFilterGroup> {
-    return new FormGroup<IFormFilterGroup>({
+  private getFilterGroup(): FormGroup<IFormGroup> {
+    return new FormGroup<IFormGroup>({
       event: new FormControl<IEvent | null>(null),
-      filter: new FormGroup({
-        property: new FormControl<IProperty | null>(null),
-        operator: new FormControl<TOperator | null>(null),
-        value: new FormControl<any>(null), // TODO: Set type
-      }),
+      filters: new FormArray<IFormFilterGroup>([]),
     });
+  }
+
+  onApplyFiltersClick() {
+    console.log(this.formFilter.value);
   }
 }
