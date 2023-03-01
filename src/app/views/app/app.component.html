@@ -1,20 +1,29 @@
-<div class="flex flex-col gap-2"
-     *ngrxLet="vm$; let vm">
-  <div class="flex items-center justify-between gap-2">
-    <div class="text-lg font-medium">Custom Filter</div>
-    <button mat-button
-            color="warn"
-            type="button"
-            [disabled]="vm.isLoading">Discard filters
-    </button>
-  </div>
-
-  <mat-progress-bar mode="indeterminate"
-                    *ngIf="vm.isLoading; else viewForm"></mat-progress-bar>
-
-  <ng-template #viewForm>
-    <div>
-      TODO
+<mat-card *ngrxLet="vm$; let vm">
+  <mat-card-content class="mat-card-content--column">
+    <div class="flex items-center justify-between gap-2">
+      <div class="text-lg font-medium">Custom Filter</div>
+      <button mat-button
+              color="warn"
+              type="button"
+              [disabled]="vm.isLoading"
+              (click)="onDiscardFiltersClick()">Discard filters
+      </button>
     </div>
-  </ng-template>
-</div>
+
+    <mat-progress-bar mode="indeterminate"
+                      *ngIf="vm.isLoading; else viewForm"></mat-progress-bar>
+
+    <ng-template #viewForm>
+      <div class="flex flex-col gap-4">
+        <app-filter-form [form]="formFilter"
+                         (addFunnelStep)="addFilter()"></app-filter-form>
+
+        <button class="w-fit"
+                mat-flat-button
+                color="primary"
+                type="button">Apply filters
+        </button>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

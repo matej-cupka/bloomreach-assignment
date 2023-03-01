@@ -1,0 +1,16 @@
+<div class="flex flex-col gap-4">
+  <ng-container *ngFor="let formRow of form.controls; let index = index">
+    <app-filter-row [form]="formRow"
+                    [index]="index"></app-filter-row>
+
+    <mat-divider></mat-divider>
+  </ng-container>
+
+  <button class="[ w-fit ] [ uppercase ] [ self-center ]"
+          mat-flat-button
+          color="primary"
+          (click)="onAddFunnelStepClick()">
+    <mat-icon>add</mat-icon>
+    Add Funnel Step
+  </button>
+</div>
