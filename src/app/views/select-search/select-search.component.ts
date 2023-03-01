@@ -66,9 +66,12 @@ export class SelectSearchComponent<T extends object> implements OnInit, OnDestro
   }
 
   checkValue() {
-    if (typeof this.fc.value === 'string' || !this._options$.value.includes(this.fc.value)) {
-      this.fc.setValue(this.value ?? '');
-    }
+    // Wait a bit until onOptionSelected gets called if option was selected
+    setTimeout(() => {
+      if (typeof this.fc.value === 'string' || !this._options$.value.includes(this.fc.value)) {
+        this.fc.setValue(this.value ?? '');
+      }
+    }, 100);
   }
 
   // ControlValueAccessor
