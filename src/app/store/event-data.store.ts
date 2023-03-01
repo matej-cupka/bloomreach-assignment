@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ComponentStore, OnStoreInit} from '@ngrx/component-store';
-import {Observable, switchMap, tap} from 'rxjs';
+import {map, Observable, switchMap, tap} from 'rxjs';
 
-import {IEventData} from '../interfaces/event-data.interface';
+import {IEventDataStoreState, IEventDataStoreViewModel} from '../interfaces/event-data-store.interface';
 import {DataService} from '../services/data.service';
 
 @Injectable()
@@ -18,16 +18,19 @@ export class EventDataStore extends ComponentStore<IEventDataStoreState> impleme
     this.loadData();
   }
 
-  readonly vm$: Observable<IEventDataStoreState> = this.state$;
+  readonly vm$: Observable<IEventDataStoreViewModel> = this.state$
+    .pipe(
+      map((state) => ({
+        ...state,
+        eventData: state.eventData ?? {
+          events: [],
+        },
+      })),
+    );
 
   readonly loadData = this.effect<void>((trigger$: Observable<void>) => trigger$.pipe(
     tap(() => this.patchState({isLoading: true})),
     switchMap(() => this.dataService.loadEventData()),
     tap((eventData) => this.patchState({isLoading: false, eventData})),
   ));
-}
-
-export interface IEventDataStoreState {
-  isLoading: boolean;
-  eventData: IEventData | undefined;
 }

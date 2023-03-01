@@ -1,0 +1,15 @@
+<mat-form-field class="w-64">
+  <input type="text"
+         [placeholder]="placeholder"
+         matInput
+         [formControl]="fc"
+         [matAutocomplete]="auto"
+         (blur)="checkValue()">
+</mat-form-field>
+
+<mat-autocomplete [displayWith]="displayWith"
+                  (optionSelected)="onOptionSelected($event.option.value)"
+                  #auto="matAutocomplete">
+  <mat-option [value]="option"
+              *ngFor="let option of options$ | async">{{displayWith(option)}}</mat-option>
+</mat-autocomplete>
