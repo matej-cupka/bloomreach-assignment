@@ -18,3 +18,14 @@ export interface IFormPropertyGroup {
   operator: FormControl<TOperator | null>;
   value: FormControl<any>; // TODO: Set type
 }
+
+export interface IFormValue {
+  event: IEvent | null;
+  properties: IFormValueProperty[];
+}
+
+export interface IFormValueProperty {
+  property: IProperty | null;
+  operator: TOperator | null;
+  value: any; // TODO: Set type
+}

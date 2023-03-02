@@ -1,13 +1,13 @@
 import {Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 
-import {IFormGroup, IFormPropertyGroup} from '../../../interfaces/form-filter.interface';
+import {IFormGroup} from '../../../interfaces/form-filter.interface';
 import {EventDataStore} from '../../../store/event-data.store';
 import {IEvent} from '../../../interfaces/event.interface';
 import {DestroySubject} from '../../../models/destroy-subject.model';
 import {distinctUntilChanged, map, Observable, of, startWith, takeUntil, tap} from 'rxjs';
 import {IProperty} from '../../../interfaces/property.interface';
-import {TOperator} from '../../../types/operator.type';
+import {getFilterPropertyGroup} from '../../../utils/form.utils';
 
 @Component({
   selector: 'app-filter-row',
@@ -69,13 +69,7 @@ export class FilterRowComponent implements OnInit, OnDestroy {
 
   onAddEventAttributeClick() {
     const formArrayProperties = this.form.controls.properties;
-    formArrayProperties.push(
-      new FormGroup<IFormPropertyGroup>({
-        property: new FormControl<IProperty | null>(null),
-        operator: new FormControl<TOperator | null>(null),
-        value: new FormControl<any>(''), // TODO: Set type
-      }),
-    );
+    formArrayProperties.push(getFilterPropertyGroup());
   }
 
   onDeleteClick() {

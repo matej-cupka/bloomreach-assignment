@@ -1,9 +1,9 @@
 import {Component, HostBinding} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray} from '@angular/forms';
 
 import {EventDataStore} from '../../store/event-data.store';
-import {IForm, IFormGroup, IFormProperty} from '../../interfaces/form-filter.interface';
-import {IEvent} from '../../interfaces/event.interface';
+import {IForm, IFormValue} from '../../interfaces/form-filter.interface';
+import {getFilterGroup} from '../../utils/form.utils';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +13,8 @@ import {IEvent} from '../../interfaces/event.interface';
 export class AppComponent {
   @HostBinding('class') readonly classList = '[ block ] [ w-full max-w-7xl ]';
 
-  readonly formArrayFilter: FormArray = new FormArray<IForm>([
-    this.getFilterGroup(),
+  readonly formArrayFilter: FormArray<IForm> = new FormArray<IForm>([
+    getFilterGroup(),
   ]);
 
   readonly vm$ = this.eventDataStore.vm$;
@@ -28,14 +28,16 @@ export class AppComponent {
   }
 
   addFilter() {
-    this.formArrayFilter.push(this.getFilterGroup());
+    this.formArrayFilter.push(getFilterGroup());
   }
 
-  private getFilterGroup(): FormGroup<IFormGroup> {
-    return new FormGroup<IFormGroup>({
-      event: new FormControl<IEvent | null>(null),
-      properties: new FormArray<IFormProperty>([]),
-    });
+  onDuplicate(index: number) {
+    const value: IFormValue = this.formArrayFilter.controls[index].value as IFormValue;
+
+    const formGroup = getFilterGroup(value.properties?.length ?? 0);
+    formGroup.setValue(value);
+
+    this.formArrayFilter.insert(index + 1, formGroup);
   }
 
   onApplyFiltersClick() {

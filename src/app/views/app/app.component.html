@@ -16,7 +16,8 @@
     <ng-template #viewForm>
       <div class="flex flex-col gap-4">
         <app-filter-form [form]="formArrayFilter"
-                         (addFunnelStep)="addFilter()"></app-filter-form>
+                         (addFunnelStep)="addFilter()"
+                         (duplicate)="onDuplicate($event)"></app-filter-form>
 
         <button class="w-fit"
                 mat-flat-button
