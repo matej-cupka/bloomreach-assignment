@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject, combineLatest, filter, map, Observable, startWith, takeUntil} from 'rxjs';
 
@@ -17,6 +17,8 @@ import {DestroySubject} from '../../models/destroy-subject.model';
 })
 export class SelectSearchComponent<T extends object> implements OnInit, OnDestroy, ControlValueAccessor {
   private readonly destroy$: DestroySubject = new DestroySubject();
+
+  @HostBinding('class') classList = 'block';
 
   @Input() placeholder: string = '';
   @Input() displayWith: (item: T) => string = (item: T) => `${item}`;

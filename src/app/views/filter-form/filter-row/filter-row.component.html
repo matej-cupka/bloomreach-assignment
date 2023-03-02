@@ -20,7 +20,8 @@
 
   <div class="flex gap-8">
     <!-- Event filter -->
-    <app-select-search placeholder="Select an event"
+    <app-select-search class="w-64"
+                       placeholder="Select an event"
                        [options]="vm.eventData.events"
                        [displayWith]="eventDisplayWithFn"
                        labelPropertyPath="type"
@@ -28,11 +29,15 @@
     </app-select-search>
 
     <!-- Property filters -->
-    <div class="flex flex-col gap-4"
-         *ngIf="form.value.event !== null">
-      <app-filter-property *ngFor="let propertyRow of form.controls.properties.controls"></app-filter-property>
+    <div class="flex flex-col"
+         *ngIf="eventProperties$ | async as eventProperties">
+      <app-filter-property [form]="propertyRow"
+                           [properties]="eventProperties"
+                           (delete)="onDeletePropertyClick(index)"
+                           *ngFor="let propertyRow of form.controls.properties.controls; let index = index"></app-filter-property>
 
       <button [class.mt-2.5]="doesntHaveEventProperties$ | async"
+              class="w-fit"
               mat-button
               color="primary"
               type="button"

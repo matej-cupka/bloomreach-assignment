@@ -1,7 +1,6 @@
 import {Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormGroup} from '@angular/forms';
 
-import {IFormGroup} from '../../../interfaces/form-filter.interface';
+import {IForm} from '../../../interfaces/form-filter.interface';
 import {EventDataStore} from '../../../store/event-data.store';
 import {IEvent} from '../../../interfaces/event.interface';
 import {DestroySubject} from '../../../models/destroy-subject.model';
@@ -18,7 +17,7 @@ export class FilterRowComponent implements OnInit, OnDestroy {
 
   @HostBinding('class') readonly classList = '[ block ]';
 
-  @Input() form!: FormGroup<IFormGroup>;
+  @Input() form!: IForm;
   @Input() index!: number;
 
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
@@ -28,7 +27,7 @@ export class FilterRowComponent implements OnInit, OnDestroy {
   readonly eventDisplayWithFn = (event: IEvent | null) => event?.type ?? '';
 
   doesntHaveEventProperties$: Observable<boolean> = of(true); // Base value until it gets set in ngOnInit
-  eventProperties$: Observable<IProperty[]> = of([]); // Base value until it gets set in ngOnInit
+  eventProperties$: Observable<IProperty[] | undefined> = of(undefined); // Base value until it gets set in ngOnInit
 
   constructor(private readonly eventDataStore: EventDataStore) {
   }
@@ -53,14 +52,9 @@ export class FilterRowComponent implements OnInit, OnDestroy {
         // Event has changed, remove all existing property filters
         this.form.controls.properties.clear();
       }),
-      map((event: IEvent | null) => event === null ? [] : event.properties),
+      map((event: IEvent | null) => event?.properties),
       takeUntil(this.destroy$),
     );
-
-    this.eventProperties$
-      .subscribe(x => {
-        console.log(x);
-      });
   }
 
   ngOnDestroy() {
@@ -78,5 +72,10 @@ export class FilterRowComponent implements OnInit, OnDestroy {
 
   onDuplicateClick() {
     this.duplicate.emit(this.index);
+  }
+
+  onDeletePropertyClick(index: number) {
+    // TODO
+    console.log(index);
   }
 }
