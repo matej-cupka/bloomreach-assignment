@@ -41,6 +41,8 @@ export class AppComponent {
   }
 
   onApplyFiltersClick() {
-    console.log(getMappedFormValue(this.formArrayFilter));
+    const mappedValue = getMappedFormValue(this.formArrayFilter);
+    console.log(mappedValue);
+    console.log(JSON.stringify(mappedValue, null, 2));
   }
 }
