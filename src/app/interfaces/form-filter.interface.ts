@@ -37,6 +37,7 @@ export interface IFormValueMapped {
   event: IEvent['type'] | undefined,
   properties: IFormValuePropertyMapped[] | undefined;
 }
+
 export interface IFormValuePropertyMapped {
   property: IProperty['property'] | null;
   operator: TOperator | null;

@@ -19,7 +19,7 @@ import {DestroySubject} from '../../../models/destroy-subject.model';
 export class OperatorSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
   private readonly destroy$: DestroySubject = new DestroySubject();
 
-  @HostBinding('class') classList = 'block';
+  @HostBinding('class') readonly classList = 'block';
 
   readonly fc: FormControl<TOperator> = new FormControl<TOperator>(OPERATOR_STRING_ARR[0], {nonNullable: true});
 

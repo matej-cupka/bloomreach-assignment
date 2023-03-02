@@ -18,7 +18,7 @@ import {DestroySubject} from '../../../models/destroy-subject.model';
 export class AutocompleteSearchComponent<T extends object> implements OnInit, OnDestroy, ControlValueAccessor {
   private readonly destroy$: DestroySubject = new DestroySubject();
 
-  @HostBinding('class') classList = 'block';
+  @HostBinding('class') readonly classList = 'block';
 
   @Input() placeholder: string = '';
   @Input() displayWith: (item: T) => string = (item: T) => `${item}`;
