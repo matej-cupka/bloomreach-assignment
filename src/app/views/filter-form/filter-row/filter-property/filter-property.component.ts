@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {distinctUntilChanged, Observable, of, takeUntil} from 'rxjs';
+import {distinctUntilChanged, takeUntil} from 'rxjs';
 
 import {IFormProperty} from '../../../../interfaces/form-filter.interface';
 import {IProperty} from '../../../../interfaces/property.interface';

@@ -24,6 +24,7 @@ import {EventDataStore} from './store/event-data.store';
 import {AppComponent} from './views/app/app.component';
 import {AutocompleteSearchComponent} from './views/form-field/autocomplete-search/autocomplete-search.component';
 import {OperatorSelectorComponent} from './views/form-field/operator-selector/operator-selector.component';
+import {ValueInputComponent} from './views/form-field/value-input/value-input.component';
 import {FilterFormComponent} from './views/filter-form/filter-form.component';
 import {FilterRowComponent} from './views/filter-form/filter-row/filter-row.component';
 import {FilterPropertyComponent} from './views/filter-form/filter-row/filter-property/filter-property.component';
@@ -34,6 +35,7 @@ import {FilterPropertyComponent} from './views/filter-form/filter-row/filter-pro
     AppComponent,
     AutocompleteSearchComponent,
     OperatorSelectorComponent,
+    ValueInputComponent,
     FilterFormComponent,
     FilterRowComponent,
     FilterPropertyComponent,

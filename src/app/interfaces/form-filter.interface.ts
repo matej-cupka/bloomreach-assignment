@@ -12,11 +12,12 @@ export interface IFormGroup {
 }
 
 export type IFormProperty = FormGroup<IFormPropertyGroup>
+export type IFormPropertyValue = FormControl<string | number | [number, number] | null>;
 
 export interface IFormPropertyGroup {
   property: FormControl<IProperty | null>;
   operator: FormControl<TOperator | null>;
-  value: FormControl<any>; // TODO: Set type
+  value: IFormPropertyValue;
 }
 
 export interface IFormValue {
@@ -24,8 +25,9 @@ export interface IFormValue {
   properties: IFormValueProperty[];
 }
 
+export type IFormValuePropertyValue = string | number | [number, number] | null;
 export interface IFormValueProperty {
   property: IProperty | null;
   operator: TOperator | null;
-  value: any; // TODO: Set type
+  value: IFormValuePropertyValue;
 }

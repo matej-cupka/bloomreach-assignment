@@ -1,0 +1,17 @@
+<div class="flex gap-2 items-center"
+     *ngrxLet="valueType$; let valueType">
+  <mat-form-field class="w-48">
+    <input matInput
+           type="text"
+           [formControl]="fc1">
+  </mat-form-field>
+
+  <ng-container *ngIf="valueType === 'numberArr'">
+    <span>and</span>
+    <mat-form-field class="w-48">
+      <input matInput
+             type="text"
+             [formControl]="fc2">
+    </mat-form-field>
+  </ng-container>
+</div>

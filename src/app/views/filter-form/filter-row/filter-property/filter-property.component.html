@@ -15,7 +15,9 @@
                            formControlName="operator"></app-operator-selector>
 
     <!-- Value -->
-    <!-- TODO -->
+    <app-value-input formControlName="value"
+                     [operator]="form.value.operator"
+                     *ngIf="form.value.operator"></app-value-input>
   </ng-container>
 
   <button class="mt-1"
