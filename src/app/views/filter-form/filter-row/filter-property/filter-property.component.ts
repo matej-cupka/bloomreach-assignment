@@ -10,7 +10,7 @@ import {IProperty} from '../../../../interfaces/property.interface';
 export class FilterPropertyComponent implements OnInit {
   @Input() form!: IFormProperty;
   @Input() properties!: IProperty[];
-  @Output() delete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() delete: EventEmitter<void> = new EventEmitter<void>();
 
   readonly propertyDisplayWithFn = (property: IProperty | null) => property?.property ?? '';
 
@@ -21,5 +21,9 @@ export class FilterPropertyComponent implements OnInit {
     if (this.properties === undefined) {
       throw new Error('no properties');
     }
+  }
+
+  onDeleteClick() {
+    this.delete.emit();
   }
 }

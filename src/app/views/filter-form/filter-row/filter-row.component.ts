@@ -75,7 +75,6 @@ export class FilterRowComponent implements OnInit, OnDestroy {
   }
 
   onDeletePropertyClick(index: number) {
-    // TODO
-    console.log(index);
+    this.form.controls.properties.removeAt(index);
   }
 }
