@@ -8,6 +8,7 @@
 
     <button mat-icon-button
             type="button"
+            [disabled]="isDeleteDisabled"
             (click)="onDeleteClick()">
       <mat-icon>delete</mat-icon>
     </button>

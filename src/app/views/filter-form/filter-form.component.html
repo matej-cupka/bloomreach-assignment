@@ -2,6 +2,7 @@
   <ng-container *ngFor="let formRow of form.controls; let index = index">
     <app-filter-row [form]="formRow"
                     [index]="index"
+                    [isDeleteDisabled]="form.controls.length === 1"
                     (delete)="onDelete($event)"
                     (duplicate)="onDuplicate($event)"></app-filter-row>
     <mat-divider></mat-divider>

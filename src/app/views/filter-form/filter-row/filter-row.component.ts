@@ -19,6 +19,7 @@ export class FilterRowComponent implements OnInit, OnDestroy {
 
   @Input() form!: IForm;
   @Input() index!: number;
+  @Input() isDeleteDisabled: boolean = true;
 
   @Output() delete: EventEmitter<number> = new EventEmitter<number>();
   @Output() duplicate: EventEmitter<number> = new EventEmitter<number>();
