@@ -1,8 +1,9 @@
-import {Component, forwardRef, HostBinding} from '@angular/core';
+import {Component, forwardRef, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {BehaviorSubject, distinctUntilChanged} from 'rxjs';
+import {BehaviorSubject, distinctUntilChanged, takeUntil} from 'rxjs';
 
 import {OPERATOR_NUMBER_ARR, OPERATOR_STRING_ARR, TOperator} from '../../../types/operator.type';
+import {DestroySubject} from '../../../models/destroy-subject.model';
 
 @Component({
   selector: 'app-operator-selector',
@@ -15,7 +16,9 @@ import {OPERATOR_NUMBER_ARR, OPERATOR_STRING_ARR, TOperator} from '../../../type
     },
   ],
 })
-export class OperatorSelectorComponent implements ControlValueAccessor {
+export class OperatorSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
+  private readonly destroy$: DestroySubject = new DestroySubject();
+
   @HostBinding('class') classList = 'block';
 
   readonly fc: FormControl<TOperator> = new FormControl<TOperator>(OPERATOR_STRING_ARR[0], {nonNullable: true});
@@ -24,6 +27,21 @@ export class OperatorSelectorComponent implements ControlValueAccessor {
   readonly operatorType$ = this._operatorType$.pipe(distinctUntilChanged());
   readonly OPERATOR_STRING_ARR = OPERATOR_STRING_ARR;
   readonly OPERATOR_NUMBER_ARR = OPERATOR_NUMBER_ARR;
+
+  ngOnInit() {
+    this.fc.valueChanges
+      .pipe(
+        takeUntil(this.destroy$),
+      )
+      .subscribe((value: TOperator) => {
+        this.onChange(value);
+        this.onTouched();
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
 
   onSelectDropdownOpened() {
     // After opening/closing dropdown set the operator type back to currently selected operator's type
