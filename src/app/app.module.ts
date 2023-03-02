@@ -15,12 +15,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
 
 // Store
 import {EventDataStore} from './store/event-data.store';
 // Components
 import {AppComponent} from './views/app/app.component';
-import {AutocompleteSearchComponent} from './views/autocomplete-search/autocomplete-search.component';
+import {AutocompleteSearchComponent} from './views/form-field/autocomplete-search/autocomplete-search.component';
+import {OperatorSelectorComponent} from './views/form-field/operator-selector/operator-selector.component';
 import {FilterFormComponent} from './views/filter-form/filter-form.component';
 import {FilterRowComponent} from './views/filter-form/filter-row/filter-row.component';
 import {FilterPropertyComponent} from './views/filter-form/filter-row/filter-property/filter-property.component';
@@ -30,6 +33,7 @@ import {FilterPropertyComponent} from './views/filter-form/filter-row/filter-pro
     // Components
     AppComponent,
     AutocompleteSearchComponent,
+    OperatorSelectorComponent,
     FilterFormComponent,
     FilterRowComponent,
     FilterPropertyComponent,
@@ -50,6 +54,8 @@ import {FilterPropertyComponent} from './views/filter-form/filter-row/filter-pro
     MatIconModule,
     MatInputModule,
     MatProgressBarModule,
+    MatSelectModule,
+    MatTabsModule,
   ],
   providers: [
     provideComponentStore(EventDataStore),

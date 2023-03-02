@@ -1,0 +1,36 @@
+<mat-form-field class="w-full">
+  <mat-select panelClass="operator-selector"
+              [formControl]="fc"
+              (openedChange)="onSelectDropdownOpened()">
+    <mat-tab-group class="overflow-hidden"
+                   [selectedIndex]="operatorType$ | async"
+                   (selectedIndexChange)="onSelectedIndexChange($event)">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="flex flex-col items-center">
+            <mat-icon>title</mat-icon>
+            <span class="text-xs">String</span>
+          </div>
+        </ng-template>
+
+        <div class="[ flex flex-col ]">
+          <mat-option [value]="option"
+                      *ngFor="let option of OPERATOR_STRING_ARR">{{option}}</mat-option>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="flex flex-col items-center">
+            <mat-icon>numbers</mat-icon>
+            <span class="text-xs">Number</span>
+          </div>
+        </ng-template>
+
+        <div class="[ flex flex-col ]">
+          <mat-option [value]="option"
+                      *ngFor="let option of OPERATOR_NUMBER_ARR">{{option}}</mat-option>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-select>
+</mat-form-field>

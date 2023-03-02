@@ -28,9 +28,10 @@ export class EventDataStore extends ComponentStore<IEventDataStoreState> impleme
       })),
     );
 
-  readonly loadData = this.effect<void>((trigger$: Observable<void>) => trigger$.pipe(
-    tap(() => this.patchState({isLoading: true})),
-    switchMap(() => this.dataService.loadEventData()),
-    tap((eventData) => this.patchState({isLoading: false, eventData})),
-  ));
+  readonly loadData = this.effect<void>((trigger$: Observable<void>) => trigger$
+    .pipe(
+      tap(() => this.patchState({isLoading: true})),
+      switchMap(() => this.dataService.loadEventData()),
+      tap((eventData) => this.patchState({isLoading: false, eventData})),
+    ));
 }

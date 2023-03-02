@@ -2,18 +2,24 @@
      [formGroup]="form">
   <!-- Property filter -->
   <app-autocomplete-search class="w-48"
-                     placeholder="Select an attribute"
-                     [options]="properties"
-                     [displayWith]="propertyDisplayWithFn"
-                     labelPropertyPath="property"
-                     formControlName="property">
+                           placeholder="Select an attribute"
+                           [options]="properties"
+                           [displayWith]="propertyDisplayWithFn"
+                           labelPropertyPath="property"
+                           formControlName="property">
   </app-autocomplete-search>
 
-  <!-- Operator -->
+  <ng-container *ngIf="form.value.property">
+    <!-- Operator -->
+    <app-operator-selector class="w-56"
+                           formControlName="operator"></app-operator-selector>
 
-  <!-- Value -->
+    <!-- Value -->
+    <!-- TODO -->
+  </ng-container>
 
-  <button class="mt-1" mat-icon-button
+  <button class="mt-1"
+          mat-icon-button
           type="button"
           (click)="onDeleteClick()">
     <mat-icon>close</mat-icon>

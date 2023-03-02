@@ -2,7 +2,7 @@ import {Component, forwardRef, HostBinding, Input, OnDestroy, OnInit} from '@ang
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject, combineLatest, filter, map, Observable, startWith, takeUntil} from 'rxjs';
 
-import {DestroySubject} from '../../models/destroy-subject.model';
+import {DestroySubject} from '../../../models/destroy-subject.model';
 
 @Component({
   selector: 'app-autocomplete-search',
@@ -35,23 +35,25 @@ export class AutocompleteSearchComponent<T extends object> implements OnInit, On
   readonly options$ = combineLatest([
     this.fc.valueChanges.pipe(startWith('')),
     this._options$,
-  ]).pipe(
-    map(([value, options]) => {
-      if (typeof value !== 'string') {
-        return options;
-      }
+  ])
+    .pipe(
+      map(([value, options]) => {
+        if (typeof value !== 'string') {
+          return options;
+        }
 
-      const valueLowerCase = value.toLowerCase();
-      return options.filter((option: T) => this.displayWith(option).includes(valueLowerCase));
-    }),
-  );
+        const valueLowerCase = value.toLowerCase();
+        return options.filter((option: T) => this.displayWith(option).includes(valueLowerCase));
+      }),
+    );
 
   ngOnInit() {
     (
-      this.fc.valueChanges.pipe(
-        takeUntil(this.destroy$),
-        filter(value => typeof value !== 'string'),
-      ) as Observable<T>
+      this.fc.valueChanges
+        .pipe(
+          takeUntil(this.destroy$),
+          filter(value => typeof value !== 'string'),
+        ) as Observable<T>
     )
       .subscribe((value: T) => {
         this.onChange(value);

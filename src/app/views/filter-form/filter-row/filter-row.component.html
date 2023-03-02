@@ -21,11 +21,11 @@
   <div class="flex gap-8">
     <!-- Event filter -->
     <app-autocomplete-search class="w-64"
-                       placeholder="Select an event"
-                       [options]="vm.eventData.events"
-                       [displayWith]="eventDisplayWithFn"
-                       labelPropertyPath="type"
-                       formControlName="event">
+                             placeholder="Select an event"
+                             [options]="vm.eventData.events"
+                             [displayWith]="eventDisplayWithFn"
+                             labelPropertyPath="type"
+                             formControlName="event">
     </app-autocomplete-search>
 
     <!-- Property filters -->

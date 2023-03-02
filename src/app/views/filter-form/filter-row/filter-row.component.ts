@@ -40,21 +40,23 @@ export class FilterRowComponent implements OnInit, OnDestroy {
       throw new Error('no index');
     }
 
-    this.doesntHaveEventProperties$ = this.form.controls.properties.valueChanges.pipe(
-      startWith([]),
-      distinctUntilChanged((a, b) => a.length === b.length),
-      map(value => value.length === 0),
-    );
+    this.doesntHaveEventProperties$ = this.form.controls.properties.valueChanges
+      .pipe(
+        startWith([]),
+        distinctUntilChanged((a, b) => a.length === b.length),
+        map(value => value.length === 0),
+      );
 
-    this.eventProperties$ = this.form.controls.event.valueChanges.pipe(
-      distinctUntilChanged((a, b) => a?.type === b?.type),
-      tap(() => {
-        // Event has changed, remove all existing property filters
-        this.form.controls.properties.clear();
-      }),
-      map((event: IEvent | null) => event?.properties),
-      takeUntil(this.destroy$),
-    );
+    this.eventProperties$ = this.form.controls.event.valueChanges
+      .pipe(
+        distinctUntilChanged((a, b) => a?.type === b?.type),
+        tap(() => {
+          // Event has changed, remove all existing property filters
+          this.form.controls.properties.clear();
+        }),
+        map((event: IEvent | null) => event?.properties),
+        takeUntil(this.destroy$),
+      );
   }
 
   ngOnDestroy() {
