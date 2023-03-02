@@ -3,7 +3,7 @@ import {FormArray} from '@angular/forms';
 
 import {EventDataStore} from '../../store/event-data.store';
 import {IForm, IFormValue} from '../../interfaces/form-filter.interface';
-import {getFilterGroup} from '../../utils/form.utils';
+import {getFilterGroup, getMappedFormValue} from '../../utils/form.utils';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +41,6 @@ export class AppComponent {
   }
 
   onApplyFiltersClick() {
-    console.log(this.formArrayFilter.value);
+    console.log(getMappedFormValue(this.formArrayFilter));
   }
 }

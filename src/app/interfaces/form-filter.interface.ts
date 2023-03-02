@@ -26,8 +26,19 @@ export interface IFormValue {
 }
 
 export type IFormValuePropertyValue = string | number | [number, number] | null;
+
 export interface IFormValueProperty {
   property: IProperty | null;
+  operator: TOperator | null;
+  value: IFormValuePropertyValue;
+}
+
+export interface IFormValueMapped {
+  event: IEvent['type'] | undefined,
+  properties: IFormValuePropertyMapped[] | undefined;
+}
+export interface IFormValuePropertyMapped {
+  property: IProperty['property'] | null;
   operator: TOperator | null;
   value: IFormValuePropertyValue;
 }

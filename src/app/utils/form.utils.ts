@@ -5,6 +5,7 @@ import {
   IFormGroup,
   IFormProperty,
   IFormPropertyGroup,
+  IFormValueMapped,
   IFormValuePropertyValue,
 } from '../interfaces/form-filter.interface';
 import {IEvent} from '../interfaces/event.interface';
@@ -26,3 +27,13 @@ export const getFilterPropertyGroup = (): IFormProperty =>
     operator: new FormControl<TOperator | null>(null),
     value: new FormControl<IFormValuePropertyValue>(null),
   });
+
+export const getMappedFormValue = (form: FormArray<IForm>): IFormValueMapped[] =>
+  form.value.map((event) => ({
+    event: event.event?.type,
+    properties: event.properties?.map((property) => ({
+      property: property.property?.property ?? null,
+      operator: property.operator ?? null,
+      value: property.value ?? null,
+    })),
+  }));
