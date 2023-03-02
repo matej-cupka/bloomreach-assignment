@@ -20,13 +20,13 @@
 
   <div class="flex gap-8">
     <!-- Event filter -->
-    <app-select-search class="w-64"
+    <app-autocomplete-search class="w-64"
                        placeholder="Select an event"
                        [options]="vm.eventData.events"
                        [displayWith]="eventDisplayWithFn"
                        labelPropertyPath="type"
                        formControlName="event">
-    </app-select-search>
+    </app-autocomplete-search>
 
     <!-- Property filters -->
     <div class="flex flex-col"

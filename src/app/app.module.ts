@@ -20,7 +20,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {EventDataStore} from './store/event-data.store';
 // Components
 import {AppComponent} from './views/app/app.component';
-import {SelectSearchComponent} from './views/select-search/select-search.component';
+import {AutocompleteSearchComponent} from './views/autocomplete-search/autocomplete-search.component';
 import {FilterFormComponent} from './views/filter-form/filter-form.component';
 import {FilterRowComponent} from './views/filter-form/filter-row/filter-row.component';
 import {FilterPropertyComponent} from './views/filter-form/filter-row/filter-property/filter-property.component';
@@ -29,7 +29,7 @@ import {FilterPropertyComponent} from './views/filter-form/filter-row/filter-pro
   declarations: [
     // Components
     AppComponent,
-    SelectSearchComponent,
+    AutocompleteSearchComponent,
     FilterFormComponent,
     FilterRowComponent,
     FilterPropertyComponent,

@@ -1,13 +1,13 @@
 <div class="flex gap-2"
      [formGroup]="form">
   <!-- Property filter -->
-  <app-select-search class="w-48"
+  <app-autocomplete-search class="w-48"
                      placeholder="Select an attribute"
                      [options]="properties"
                      [displayWith]="propertyDisplayWithFn"
                      labelPropertyPath="property"
                      formControlName="property">
-  </app-select-search>
+  </app-autocomplete-search>
 
   <!-- Operator -->
 

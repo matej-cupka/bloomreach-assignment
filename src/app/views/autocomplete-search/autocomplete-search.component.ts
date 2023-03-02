@@ -5,17 +5,17 @@ import {BehaviorSubject, combineLatest, filter, map, Observable, startWith, take
 import {DestroySubject} from '../../models/destroy-subject.model';
 
 @Component({
-  selector: 'app-select-search',
-  templateUrl: './select-search.component.html',
+  selector: 'app-autocomplete-search',
+  templateUrl: './autocomplete-search.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectSearchComponent),
+      useExisting: forwardRef(() => AutocompleteSearchComponent),
       multi: true,
     },
   ],
 })
-export class SelectSearchComponent<T extends object> implements OnInit, OnDestroy, ControlValueAccessor {
+export class AutocompleteSearchComponent<T extends object> implements OnInit, OnDestroy, ControlValueAccessor {
   private readonly destroy$: DestroySubject = new DestroySubject();
 
   @HostBinding('class') classList = 'block';
