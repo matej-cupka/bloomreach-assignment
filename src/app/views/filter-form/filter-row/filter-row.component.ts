@@ -1,10 +1,10 @@
 import {Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {distinctUntilChanged, map, Observable, of, startWith, takeUntil} from 'rxjs';
 
 import {IForm} from '../../../interfaces/form-filter.interface';
 import {EventDataStore} from '../../../store/event-data.store';
 import {IEvent} from '../../../interfaces/event.interface';
 import {DestroySubject} from '../../../models/destroy-subject.model';
-import {distinctUntilChanged, map, Observable, of, startWith, takeUntil, tap} from 'rxjs';
 import {IProperty} from '../../../interfaces/property.interface';
 import {getFilterPropertyGroup} from '../../../utils/form.utils';
 
@@ -49,14 +49,20 @@ export class FilterRowComponent implements OnInit, OnDestroy {
 
     this.eventProperties$ = this.form.controls.event.valueChanges
       .pipe(
+        startWith(this.form.value.event ?? null),
         distinctUntilChanged((a, b) => a?.type === b?.type),
-        tap(() => {
-          // Event has changed, remove all existing property filters
-          this.form.controls.properties.clear();
-        }),
         map((event: IEvent | null) => event?.properties),
         takeUntil(this.destroy$),
       );
+
+    this.form.controls.event.valueChanges
+      .pipe(
+        distinctUntilChanged((a, b) => a?.type === b?.type),
+      )
+      .subscribe(() => {
+        // Event has changed, remove all existing property filters
+        this.form.controls.properties.clear();
+      });
   }
 
   ngOnDestroy() {
